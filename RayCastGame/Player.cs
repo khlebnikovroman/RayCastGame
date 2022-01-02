@@ -7,11 +7,13 @@ namespace RayCastGame
 {
     internal class Player
     {
-        private readonly float speed;
-        private readonly float turnSpeed;
-        private int fov;
-        private Vector2 position;
-
+        public float deltaAngle;
+        public float fov = (int) (((Math.PI * 2) / 360) * 75);
+        public readonly float speed;
+        public readonly float turnSpeed;
+        public int maxdepth = 800;
+        public int numOfRays = 120;
+        public Vector2 position;
         public float Angle { get; private set; }
 
         public Vector2 Position
@@ -25,6 +27,8 @@ namespace RayCastGame
             position = pos;
             this.speed = speed;
             turnSpeed = 0.05f;
+            deltaAngle = fov / numOfRays;
+            Angle = -1.57f;
         }
 
 

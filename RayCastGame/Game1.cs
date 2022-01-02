@@ -12,6 +12,7 @@ namespace RayCastGame
         private SpriteBatch _spriteBatch;
         private Texture2D ballTexture;
         private Vector2 ballPosition;
+        private WorldMap map;
 
 
         public Game1()
@@ -29,6 +30,11 @@ namespace RayCastGame
                 _graphics.PreferredBackBufferHeight / 2);
             ballSpeed = 300;
             player = new Player(ballPosition, ballSpeed);
+            map = new WorldMap();
+            _graphics.IsFullScreen = false;
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -73,7 +79,9 @@ namespace RayCastGame
                 SpriteEffects.None,
                 0f
             );
-            _spriteBatch.DrawLine(player.Position, 100f, player.Angle, Color.Black);
+            //_spriteBatch.DrawLine(player.Position, 100f, player.Angle, Color.Black);
+            RayCasting.RayCast(player, _spriteBatch);
+            map.Draw(_spriteBatch);
             _spriteBatch.End();
             // TODO: Add your drawing code here
 
